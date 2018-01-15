@@ -6,7 +6,7 @@ const Sequelize = require( 'sequelize' ),
 let sequelize = new Sequelize( 'postgres://postgres@localhost:5432/auth-server', { operatorsAliases: false } )
 
 // setup User model and it's fields and behaviors
-let User = sequelize.define( 'users', {
+let User = sequelize.define( 'user', {
   username: {
     type: Sequelize.STRING,
     unique: true,
@@ -26,11 +26,6 @@ let User = sequelize.define( 'users', {
     beforeCreate: ( user ) => {
       const salt = bcrypt.genSaltSync()
       user.password = bcrypt.hashSync( user.password, salt )
-    }
-  },
-  instanceMethods: {
-    validPassword: ( password ) => {
-      return bcrypt.compareSync( password, this.password )
     }
   }
 } )

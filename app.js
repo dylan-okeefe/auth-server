@@ -1,5 +1,6 @@
 const express = require('express'),
       bodyParser = require('body-parser'),
+      cookieParser = require('cookie-parser'),
       morgan = require('morgan'),
       config = require('./configuration')
 
@@ -10,6 +11,9 @@ app.set( 'port', config.get('port') )
 
 // set morgan to log info about our requests for development use
 app.use( morgan('dev') )
+
+// set express to use cookie-parser
+app.use(cookieParser())
 
 // initialize body-parser to parse incoming parameters requests to req.body
 app.use( bodyParser.json( { limit: '10mb' } ) ) // for parsing application/json

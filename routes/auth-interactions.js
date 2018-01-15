@@ -1,16 +1,16 @@
-const express = require( 'express' ),
-	     fs 		= require( 'fs' ),
-	     router = express.Router()
+const   express = require( 'express' ),
+	           fs = require( 'fs' ),
+	       router = express.Router()
 
-let AuthService = require('../middleware/auth')
+let AuthService = require( '../middleware/auth' )
 
 router
-  .route('/signup')
+  .route( '/signup' )
   .post(
 
     AuthService.signup,
 
-    (req, res) => {
+    ( req, res ) => {
 
       return res.json( req.user_success )
 
@@ -18,15 +18,34 @@ router
   )
 
 router
-  .route('/login')
+  .route( '/login' )
   .post(
 
     AuthService.login,
+    AuthService.sign,
 
-    (req, res) => {
+    ( req, res ) => {
+
+      return res.json( {
+                        success: req.success,
+                        auth_token: req.auth_token_encoded
+                       } )
 
     }
 
+  )
+
+router
+  .route( '/logout' )
+  .get(
+
+    AuthService.logout,
+
+    ( req, res ) => {
+
+      return res.json( { success: true } )
+
+    }
   )
 
 module.exports = router

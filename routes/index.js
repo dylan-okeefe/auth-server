@@ -3,4 +3,6 @@ const express = require('express'),
 
 router.use('/', require('./auth-interactions') )
 
+router.use('/api', require('./api'))
+
 module.exports = router
