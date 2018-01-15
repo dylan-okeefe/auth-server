@@ -1,0 +1,4 @@
+/node_modules
+/etc/*.json
+/etc/*.js
+!/etc/.example.config.json
