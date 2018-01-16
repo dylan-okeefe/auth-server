@@ -36,6 +36,7 @@ router
   )
 
 router
+	.use(AuthService.verify)
   .route( '/logout' )
   .get(
 
