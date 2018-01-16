@@ -26,3 +26,6 @@ app.use( require( './routes/index' ) )
 
 // start the express server
 let server = app.listen( app.get( 'port' ), () => console.log( 'App started on port ' + app.get('port') ) )
+
+// export the server for testing
+module.exports = app
