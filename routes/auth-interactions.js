@@ -36,6 +36,20 @@ router
   )
 
 router
+	.route( '/validate' )
+	.get(
+
+		AuthService.validate,
+
+		( req, res ) => {
+
+			return res.json( {
+												validated: req.valid
+											} )
+		}
+	)
+
+router
 	.use(AuthService.verify)
   .route( '/logout' )
   .get(

@@ -1,8 +1,9 @@
 const express = require('express'),
       router = express.Router()
 
-router.use('/', require('./auth-interactions') )
+router.use(express.static(__dirname + './../'))
 
-router.use('/api', require('./api'))
+router.use('/api', require('./auth-interactions') )
+
 
 module.exports = router
