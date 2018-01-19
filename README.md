@@ -92,14 +92,25 @@ Any routes created in the /routes/api.js file will require a cookie with a valid
 token to be passed to access.
 
 External Packages:
-"bcrypt": "^1.0.3", Encrypting passwords
-"body-parser": "^1.18.2", Parsing requests
-"cookie-parser": "^1.4.3", Parsing requests
-"express": "^4.16.2", Server framework
-"jsonwebtoken": "^8.1.0", Signing and encrypting web tokens
-"nconf": "^0.10.0", Preferred config package
-"pg": "^7.4.1", Package for PostgreSQL
-"sequelize": "^4.31.2", SQL-based ORM
-"chai": "^4.1.2", Testing
-"chai-http": "^3.0.0", Testing
-"mocha": "^4.1.0" Testing
+
+[bcrypt](https://www.npmjs.com/package/bcrypt): "^1.0.3", Encrypting passwords
+
+[body-parser](https://www.npmjs.com/package/body-parser): "^1.18.2", Parsing requests
+
+[cookie-parser](https://www.npmjs.com/package/cookie-parser): "^1.4.3", Parsing requests
+
+[express](https://www.npmjs.com/package/express): "^4.16.2", Server framework
+
+[jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken): "^8.1.0", Signing and encrypting web tokens
+
+[nconf](https://www.npmjs.com/package/nconf): "^0.10.0", Preferred config package
+
+[pg](https://www.npmjs.com/package/pg): "^7.4.1", Package for PostgreSQL
+
+[sequelize](https://www.npmjs.com/package/sequelize): "^4.31.2", SQL-based ORM
+
+[chai](https://www.npmjs.com/package/chai): "^4.1.2", Testing
+
+[chai-http](https://github.com/chaijs/chai-http): "^3.0.0", Testing
+
+[mocha](https://www.npmjs.com/package/mocha): "^4.1.0" Testing
