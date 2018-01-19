@@ -12,11 +12,14 @@ and a payload including a success boolean and error data instead of a 404
 because I had imagined this being used with a React front end.
 
 ### Prerequisites:
-You must have Node installed on your machine, along with Postgres.
+You must have Node and NPM installed on your machine, along with Postgres.
 These instructions are for use on unix based operating systems only.
 
 The server start command requires nodemon so make sure you have that installed globally.
 $ npm install -g nodemon
+
+Install the dependencies:
+$ npm install
 
 Create two databases, named "auth-server" and "auth-server-tester".
 (You can name them whatever you want but make sure to change the values in your
@@ -67,13 +70,15 @@ It will return with:
 To log out send a GET request to '/logout', it will check for the presence of a
 valid token sent with a cookie and then destroy the cookie.
 
+Any routes created in the /routes/api.js file will require a cookie with a valid
+token to be passed to access.
+
 External Packages:
 "bcrypt": "^1.0.3", Encrypting passwords
 "body-parser": "^1.18.2", Parsing requests
 "cookie-parser": "^1.4.3", Parsing requests
 "express": "^4.16.2", Server framework
 "jsonwebtoken": "^8.1.0", Signing and encrypting web tokens
-"morgan": "^1.9.0",
 "nconf": "^0.10.0", Preferred config package
 "pg": "^7.4.1", Package for PostgreSQL
 "sequelize": "^4.31.2", SQL-based ORM
