@@ -3,4 +3,3 @@
 /etc/*.json
 /etc/*.js
 !/etc/.example.config.json
-/client/node_modules
