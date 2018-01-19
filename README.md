@@ -91,7 +91,7 @@ valid token sent with a cookie and then destroy the cookie.
 Any routes created in the /routes/api.js file will require a cookie with a valid
 token to be passed to access.
 
-External Packages:
+### External Packages:
 
 [bcrypt](https://www.npmjs.com/package/bcrypt): "^1.0.3", Encrypting passwords
 
