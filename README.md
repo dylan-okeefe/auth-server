@@ -15,10 +15,13 @@ because I had imagined this being used with a React front end.
 You must have Node and NPM installed on your machine, along with Postgres.
 These instructions are for use on unix based operating systems only.
 
-The server start command requires nodemon so make sure you have that installed globally.
+The server start command requires nodemon so make sure you have that installed
+globally.
+
 `$ npm install -g nodemon`
 
 Install the dependencies:
+
 `$ npm install`
 
 Create two databases, named "auth-server" and "auth-server-tester".
@@ -28,21 +31,26 @@ file, copy the file and make any changes needed for development and rename to
 /etc/.development.config.json).
 
 `$psql -U postgres -c 'CREATE DATABASE "auth-server"'`
+
 `$psql -U postgres -c 'CREATE DATABASE "auth-server-tester"'`
 
 ### Unit tests:
 
 Run the unit tests with
+
 `$ npm run test`
 
 ### Using the server:
 
 Run the server with
+
 `$ npm run start:dev`
 
 To create a new user, send a POST request to '/signup' with a payload that looks
 as such:
-```{
+
+```
+{
   "username": "a_user",
   "email": "user@test.com",
   "password": "password"
@@ -50,21 +58,27 @@ as such:
 ```
 
 It will respond with:
-```{
+
+```
+{
   "success": bool,
   "message": string
 }
 ```
 
 Login by POSTing to the '/login' endpoint with:
-```{
+
+```
+{
   "email": "user@test.com",
   "password": "password"
 }
 ```
 
 It will return with:
-```{
+
+```
+{
   "success": bool,
   "auth_token": encoded JWT or null,
   "message": string if error, omitted if success
