@@ -9,9 +9,9 @@ jwtSecret = config.get('jwtSecret')
 let AuthService = {}
 
 // signup
-// expects username, email, password
+// expects username, email, password in request
 
-AuthService.signup = (req, res, next) => {
+AuthService.signup = ( req, res, next ) => {
 
   User.create( {
                   username: req.body.username,
@@ -34,7 +34,7 @@ AuthService.signup = (req, res, next) => {
 }
 
 // login
-// expects email, password
+// expects email, password in request
 
 AuthService.login = ( req, res, next ) => {
 
@@ -44,7 +44,11 @@ AuthService.login = ( req, res, next ) => {
   User.findOne( { where: { email: email } } )
       .then( ( user ) => {
         if( !user ){
-          // do a thing
+
+          req.success = false
+          req.auth_token_encoded = null
+          req.message = 'Incorrect email or password.'
+
           return next()
         }
 
@@ -52,15 +56,37 @@ AuthService.login = ( req, res, next ) => {
 
         if( !validPassword ){
 
-          // throw an error!!!!!
+          req.success = false
+          req.auth_token_encoded = null
+          req.message = 'Incorrect email or password.'
+
+          return next()
 
         }
 
-        req.success = true;
+        AuthService.sign( { user: email } )
+                   .then( token => {
 
-        req.user = { user: email }
+                     req.success = true
 
-        next()
+                     req.auth_token_encoded = token
+
+                     res.cookie( 'auth', token )
+
+                     next()
+
+                   } )
+                   .catch( err => {
+
+                     req.success = false
+
+                     req.auth_token_encoded = null
+
+                     req.message = "Error: " + err
+
+                     next()
+
+                   } )
 
       } )
 
@@ -68,16 +94,17 @@ AuthService.login = ( req, res, next ) => {
 
 // sign
 // sign a jwt for user
+// expects user information
 
-AuthService.sign = ( req, res, next ) => {
+AuthService.sign = ( user ) => {
 
-  let token = jwt.sign( req.user, jwtSecret, { expiresIn: '7d' } )
+  return new Promise( ( resolve, reject ) => {
 
-  req.auth_token_encoded = token
+    let token = jwt.sign( user, jwtSecret, { expiresIn: '7d' } )
 
-  res.cookie( 'auth', token )
+    return resolve( token )
 
-  next()
+  } )
 
 }
 
@@ -90,17 +117,17 @@ AuthService.verify = ( req, res, next ) => {
 
 	  if ( err ) {
 
-	  	res.status( 401 );
+	  	res.status( 401 )
 
-	  	return next( err );
+	  	return next( err )
 
 	  }
 
-	  req.auth_token_decoded = decoded;
+	  req.auth_token_decoded = decoded
 
-    req.valid = true;
+    req.valid = true
 
-	  next();
+	  next()
 
 	} );
 
@@ -115,9 +142,9 @@ AuthService.validate = ( req, res, next ) => {
 
 	  if ( err ) {
 
-	  	req.valid = false;
+	  	req.valid = false
 
-	  	return next();
+	  	return next()
 
 	  }
 
@@ -125,7 +152,7 @@ AuthService.validate = ( req, res, next ) => {
 
     req.valid = true;
 
-	  next();
+	  next()
 
 	} );
 

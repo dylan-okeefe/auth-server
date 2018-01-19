@@ -3,3 +3,4 @@
 /etc/*.json
 /etc/*.js
 !/etc/.example.config.json
+!/etc/.test.config.json

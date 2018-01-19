@@ -1,14 +1,14 @@
 const express = require('express'),
-      router = express.Router()
+      router  = express.Router()
 
 
 let AuthService = require('../middleware/auth')
 
-
-// router.use( AuthService.parse ); 	// Parse JWT from Request
-
 router.use( AuthService.verify ); 	// Verify JWT
 
+// use this file for any routes that you want protected
+
+// example
 // router
 //     .route('/test')
 //     .get(
@@ -18,6 +18,7 @@ router.use( AuthService.verify ); 	// Verify JWT
 //       (req, res) => {
 //
 //         return res.json({ test: "test"})
+
 //       }
 //     )
 

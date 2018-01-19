@@ -22,13 +22,13 @@ router
   .post(
 
     AuthService.login,
-    AuthService.sign,
 
     ( req, res ) => {
 
       return res.json( {
                         success: req.success,
-                        auth_token: req.auth_token_encoded
+                        auth_token: req.auth_token_encoded,
+												message: req.message
                        } )
 
     }
