@@ -82,7 +82,7 @@ AuthService.sign = ( req, res, next ) => {
 }
 
 // verify
-// verifies jwt in cookie for all private requests
+// middleware verifies jwt in cookie for all private requests
 
 AuthService.verify = ( req, res, next ) => {
 
@@ -97,6 +97,33 @@ AuthService.verify = ( req, res, next ) => {
 	  }
 
 	  req.auth_token_decoded = decoded;
+
+    req.valid = true;
+
+	  next();
+
+	} );
+
+};
+
+// validate
+// validate jwt in cookie for front end check
+
+AuthService.validate = ( req, res, next ) => {
+
+	jwt.verify( req.cookies.auth, jwtSecret, ( err, decoded ) => {
+
+	  if ( err ) {
+
+	  	req.valid = false;
+
+	  	return next();
+
+	  }
+
+	  req.auth_token_decoded = decoded;
+
+    req.valid = true;
 
 	  next();
 
